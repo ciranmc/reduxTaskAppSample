@@ -17,4 +17,6 @@ Step 2. To run the app run `ng serve` from the command line.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-![Alt text](AppWithReduxDevTools.png?raw=true "The app in action with redux dev tools")
+![Alt text](AppWithReduxDevToolsBefore.png?raw=true "View of app due to LOAD_TASKS action")
+
+![Alt text](AppWithReduxDevToolsAfter.png?raw=true "View of app due to LOAD_TASKS_COMPLETE action")
