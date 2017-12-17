@@ -18,11 +18,16 @@ export class TasksModel {
     this.tasks$ = this._store.select(s => s.tasksStore.taskList);
 
     this.tasksStatus$ = this._store.select(s => s.tasksStore.taskStatus);
+    
+    this.loadTasks();
   }
 
 
-  loadTasks(query = '') { 
+  private loadTasks(query = '') { 
     this._store.dispatch(new taskActions.LoadTasksAction(query));
   }
 
+  public updateTask(task:Task ) { 
+    this._store.dispatch(new taskActions.UpdateTaskAction(task));
+  }
 }

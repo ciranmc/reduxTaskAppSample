@@ -1,12 +1,15 @@
 import { Action } from '@ngrx/store';
 // Types
 import { type } from './type';
+import { Task } from '../entities';
 
 export const ActionTypes = {
     LOAD_TASKS: type('LOAD TASKS'),
     LOAD_TASKS_COMPLETE: type('LOAD TASKS COMPLETE'),
     LOAD_TASKS_FAILED: type('LOAD TASKS FAILED'),
-    DELETE_TASK: type('DELETE TASK')
+    UPDATE_TASK: type('UPDATE TASK'),
+    UPDATE_TASK_COMPLETE: type('UPDATE TASK COMPLETE'),
+    UPDATE_TASK_FAILED: type('UPDATE TASK FAILED'),
     };
 
 export class LoadTasksAction implements Action {
@@ -14,4 +17,8 @@ export class LoadTasksAction implements Action {
     constructor( public payload: string ) { }
 }
 
+export class UpdateTaskAction implements Action {
+    readonly type = ActionTypes.UPDATE_TASK;
+    constructor( public payload:Task ) { }
+}
 

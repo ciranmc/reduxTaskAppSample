@@ -1,0 +1,29 @@
+
+ <div class="container">
+    <h2>Task Progress Component</h2>
+
+    <div *ngIf="tasks$ | async"> 
+        <div class="progress">
+          <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="notStartedPercentage" aria-valuemin="0" aria-valuemax="100" [style.width.%]="notStartedPercentage">
+          {{notStartedPercentage}}%  Not Started
+          </div>
+        </div>
+
+        <div class="progress">
+            
+          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="inProgressPercentage" aria-valuemin="0" aria-valuemax="100" [style.width.%]="inProgressPercentage">
+              {{inProgressPercentage}}% In Progress
+          </div>
+        
+        </div>
+
+      <div class="progress">
+          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="donePercentage" aria-valuemin="0" aria-valuemax="100" [style.width.%]="donePercentage">
+              {{donePercentage}}% Done
+          </div>
+        </div> 
+  </div>
+
+  </div>
+
+

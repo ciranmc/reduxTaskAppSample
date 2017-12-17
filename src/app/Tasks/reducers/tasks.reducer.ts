@@ -3,7 +3,7 @@ import * as TasksActions from '../actions/tasks.actions';
 
 import { Effect, EffectSources } from '@ngrx/effects';
 
-import { Task } from '../entities';
+import { Task,TaskStatus } from '../entities';
 import { EffectStatus } from '../effects/effects-status.enum';
 
 
@@ -44,6 +44,21 @@ export function tasksReducer(state: TasksState = initialState, action: any): Tas
             };
         }
 
+        case TasksActions.ActionTypes.UPDATE_TASK: {
+            return {
+                ...state
+            };
+        }
+        
+        case TasksActions.ActionTypes.UPDATE_TASK_COMPLETE: {
+
+            return {
+                ...state,
+                taskList:updateTask(state.taskList, action.payload)
+            };
+        }
+
+
     default:
         return state;
   }
@@ -51,24 +66,33 @@ export function tasksReducer(state: TasksState = initialState, action: any): Tas
 
 export function populateTasks(documents: any) {
     
-    SimulateSlowResponseFromServer(5000);
-
     let tasks :Task[];  
     tasks = [];
-
+    let taskId:number;
+    taskId=1;
 
     documents.forEach(taskItem => {
-            tasks.push( {title:taskItem.fields.title.stringValue, description:taskItem.fields.description.stringValue})
+
+            taskId++;
+            tasks.push( {title:taskItem.fields.title.stringValue,
+                         description:taskItem.fields.description.stringValue,
+                         status:TaskStatus.NotStarted,
+                         id:taskId
+                            })
         } 
     );
 
     return tasks;
 }
 
-function SimulateSlowResponseFromServer(ms){
-    var start = new Date().getTime();
-    var end = start;
-    while(end < start + ms) {
-      end = new Date().getTime();
-   }
- }
+
+export function updateTask(tasks, updatedTask) {
+    let newTasksObject = tasks.map(x => Object.assign({}, x));
+    
+    let objIndex = newTasksObject.
+                    findIndex((task =>
+                    task.id === updatedTask.id));
+                    newTasksObject[objIndex] = updatedTask;
+
+    return newTasksObject;
+}

@@ -10,7 +10,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 import { of } from 'rxjs/observable/of';
-import { HttpUtil } from 'app/Tasks/services/httpUtil.service';
+import { HttpUtil } from 'app/tasks/services/httpUtil.service';
+
+import { TaskStatus } from '../entities';
 
 @Injectable()
 export class TasksEffects {
@@ -29,6 +31,27 @@ export class TasksEffects {
         })
 
     );
+
+    @Effect() updateTask$: Observable<Action> = this.actions$.ofType(TasksActions.ActionTypes.UPDATE_TASK)
+    .map(toPayload)
+    .mergeMap(taskPayload =>      
+              of( 
+                  //This is a mock updated data returned from the server
+                     {
+                        id:taskPayload.id,
+                        status:taskPayload.status,
+                        title:taskPayload.title,
+                        description:taskPayload.description
+                       }
+                )
+              .map((data) => {
+                return ({ type: TasksActions.ActionTypes.UPDATE_TASK_COMPLETE, payload: data })
+              })
+              .catch(() => {
+                return of({ type: TasksActions.ActionTypes.UPDATE_TASK_FAILED })
+              })
+
+          ); 
 
   constructor(
     private http: HttpClient,
