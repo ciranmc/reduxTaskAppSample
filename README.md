@@ -22,5 +22,5 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 To run the Karma/Jasmine tests run `ng test` from the command line.
 
 ## View of app in action
-![Alt text](TheAppinAction.png?raw=true "View of app in action")
+![Alt text](TheAppInAction.png?raw=true "View of app in action")
 
